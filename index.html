@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Crop Disease and Weather Recommendation System</h1>
+        <div class="form-group">
+            <label for="crop-select">Select Crop:</label>
+            <select id="crop-select">
+                <option value="">--Select a Crop--</option>
+                <option value="wheat">Wheat</option>
+                <option value="rice">Rice</option>
+                <option value="corn">Corn</option>
+                <option value="potato">Potato</option>
+                <option value="tomato">Tomato</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="disease-select">Select Disease:</label>
+            <select id="disease-select">
+                <option value="">--Select a Disease--</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="weather-select">Select Weather Condition:</label>
+            <select id="weather-select">
+                <option value="">--Select Weather Condition--</option>
+                <option value="cool-wet">Cool & Wet</option>
+                <option value="warm-dry">Warm & Dry</option>
+                <option value="hot-humid">Hot & Humid</option>
+            </select>
+        </div>
+
+        <button onclick="showRecommendation()">Get Recommendation</button>
+
+        <div id="recommendation" class="recommendation">
+            <h2>Recommendation</h2>
+            <p><strong>Fertilizer:</strong> <span id="fertilizer"></span></p>
+            <p><strong>Pesticides:</strong> <span id="pesticides"></span></p>
+            <p id="no-recommendation"></p>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
