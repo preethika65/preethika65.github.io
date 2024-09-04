@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Suggestion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://example.com/farming-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for readability */
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input, button {
+            width: calc(100% - 22px);
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            background: #fff;
+            color: #000;
+        }
+        button {
+            background: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crop Suggestion</h1>
+        <p>Enter a crop name to get suggestions for fertilizers, pesticides, weather conditions, and suitable soil.</p>
+        <input type="text" id="cropInput" placeholder="Enter crop name">
+        <button onclick="getSuggestions()">Get Suggestions</button>
+
+        <div class="results" id="results"></div>
+    </div>
+
+    <script>
+        const cropData = {
+            "Wheat": {
+                fertilizers: "Nitrogen, Phosphorus, Potassium",
+                pesticides: "Insecticides for aphids, Fungicides for rust",
+                weather: "Cool weather, avoid heavy rainfall",
+                soil: "Loamy soil with good drainage"
+            },
+            "Corn": {
+                fertilizers: "Nitrogen, Phosphorus, Potassium",
+                pesticides: "Insecticides for corn borer, Fungicides for gray leaf spot",
+                weather: "Warm weather, requires full sunlight",
+                soil: "Well-drained, fertile soil"
+            },
+            "Rice": {
+                fertilizers: "Nitrogen, Phosphorus, Potassium",
+                pesticides: "Insecticides for rice weevil, Fungicides for blast",
+                weather: "Hot and humid conditions, requires plenty of water",
+                soil: "Clayey soil that retains water"
+            },
+            "Tomato": {
+                fertilizers: "Balanced NPK fertilizer",
+                pesticides: "Insecticides for whiteflies, Fungicides for blight",
+                weather: "Warm to hot weather, needs regular watering",
+                soil: "Well-drained, loamy soil with organic matter"
+            },
+            "Potato": {
+                fertilizers: "Phosphorus, Potassium",
+                pesticides: "Insecticides for Colorado potato beetle, Fungicides for late blight",
+                weather: "Cool weather, avoid excessive moisture",
+                soil: "Loose, well-drained soil rich in organic matter"
+            },
+            "Carrot": {
+                fertilizers: "Balanced NPK fertilizer",
+                pesticides: "Insecticides for carrot fly, Fungicides for leaf blight",
+                weather: "Cool weather, requires well-drained soil",
+                soil: "Deep, loose, sandy soil"
+            },
+            "Onion": {
+                fertilizers: "Nitrogen, Phosphorus, Potassium",
+                pesticides: "Insecticides for onion maggot, Fungicides for downy mildew",
+                weather: "Cool to moderate weather, prefers full sunlight",
+                soil: "Well-drained soil with high organic content"
+            },
+            "Pepper": {
+                fertilizers: "Balanced NPK fertilizer",
+                pesticides: "Insecticides for aphids, Fungicides for powdery mildew",
+                weather: "Warm weather, needs regular watering",
+                soil: "Well-drained, fertile soil"
+            },
+            "Soybean": {
+                fertilizers: "Nitrogen, Phosphorus, Potassium",
+                pesticides: "Insecticides for soybean aphid, Fungicides for soybean rust",
+                weather: "Warm weather, needs moderate rainfall",
+                soil: "Well-drained, loamy soil"
+            },
+            "Cucumber": {
+                fertilizers: "Balanced NPK fertilizer",
+                pesticides: "Insecticides for cucumber beetles, Fungicides for powdery mildew",
+                weather: "Warm weather, requires plenty of water",
+                soil: "Loamy, well-drained soil"
+            }
+        };
+
+        function getSuggestions() {
+            const crop = document.getElementById('cropInput').value.trim();
+            const resultsDiv = document.getElementById('results');
+            const data = cropData[crop];
+
+            if (data) {
+                resultsDiv.innerHTML = `
+                    <h2>Suggestions for ${crop}</h2>
+                    <p><strong>Fertilizers:</strong> ${data.fertilizers}</p>
+                    <p><strong>Pesticides:</strong> ${data.pesticides}</p>
+                    <p><strong>Weather Conditions:</strong> ${data.weather}</p>
+                    <p><strong>Suitable Soil:</strong> ${data.soil}</p>
+                `;
+            } else {
+                resultsDiv.innerHTML = `<p>No data available for "${crop}". Please try another crop.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
