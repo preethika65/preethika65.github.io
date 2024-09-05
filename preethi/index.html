@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Suggestion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://yourimageurl.com/agriculture-field.jpg'); /* Use an agriculture field background */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        header {
+            background-color: rgba(0, 100, 0, 0.8); /* Green color with transparency */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* White background with transparency */
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+            color: #333;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #28a745; /* Bright green button */
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 204, 0.9); /* Light yellow background */
+            border-left: 5px solid #4CAF50;
+            border-radius: 6px;
+        }
+
+        .result h3 {
+            color: #4CAF50;
+        }
+
+        .result ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .result li {
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: #eaf6ea; /* Light green */
+            border-radius: 4px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Crop Suggestion</h1>
+</header>
+
+<div class="container">
+    <h2>Find the Best Crops for Your Land</h2>
+    <form id="cropForm">
+        <label for="climate">Select Climate:</label>
+        <select id="climate">
+            <option value="tropical">Tropical</option>
+            <option value="dry">Dry</option>
+            <option value="temperate">Temperate</option>
+            <option value="continental">Continental</option>
+            <option value="polar">Polar</option>
+        </select>
+
+        <label for="soil">Select Type of Soil:</label>
+        <select id="soil">
+            <option value="clay">Clay</option>
+            <option value="sandy">Sandy</option>
+            <option value="loamy">Loamy</option>
+            <option value="silt">Silt</option>
+            <option value="peat">Peat</option>
+        </select>
+
+        <label for="acres">Number of Acres:</label>
+        <input type="number" id="acres" placeholder="Enter number of acres">
+
+        <label for="water">Water Availability:</label>
+        <select id="water">
+            <option value="high">High</option>
+            <option value="moderate">Moderate</option>
+            <option value="low">Low</option>
+        </select>
+
+        <button type="button" onclick="suggestCrops()">Get Crop Suggestions</button>
+    </form>
+
+    <div class="result" id="cropResult" style="display:none;">
+        <h3>Suggested Crop Information:</h3>
+        <ul id="cropList"></ul>
+    </div>
+</div>
+
+<script>
+    function suggestCrops() {
+        // Get user inputs
+        const climate = document.getElementById('climate').value;
+        const soil = document.getElementById('soil').value;
+        const acres = document.getElementById('acres').value;
+        const water = document.getElementById('water').value;
+
+        // Crop data including fertilizers and pesticides
+        const crops = [
+            {
+                name: 'Rice',
+                climate: ['tropical'],
+                soil: ['clay', 'silt'],
+                water: ['high', 'moderate'],
+                fertilizers: 'Urea, DAP (Di-Ammonium Phosphate)',
+                pesticides: 'Cartap Hydrochloride, Chlorantraniliprole'
+            },
+            {
+                name: 'Wheat',
+                climate: ['temperate', 'continental'],
+                soil: ['loamy', 'sandy'],
+                water: ['moderate', 'low'],
+                fertilizers: 'Urea, Super Phosphate',
+                pesticides: 'Chlorpyrifos, Imidacloprid'
+            },
+            {
+                name: 'Maize',
+                climate: ['tropical', 'temperate'],
+                soil: ['loamy', 'sandy'],
+                water: ['moderate'],
+                fertilizers: 'Nitrogen, Phosphorus, Potassium (NPK)',
+                pesticides: 'Carbaryl, Thiodicarb'
+            },
+            {
+                name: 'Barley',
+                climate: ['continental', 'dry'],
+                soil: ['loamy', 'sandy'],
+                water: ['low'],
+                fertilizers: 'Ammonium Nitrate, Potash',
+                pesticides: 'Cypermethrin, Lambda-Cyhalothrin'
+            },
+            {
+                name: 'Cotton',
+                climate: ['dry'],
+                soil: ['sandy', 'loamy'],
+                water: ['low'],
+                fertilizers: 'Nitrogen, Potassium, Phosphorus',
+                pesticides: 'Bifenthrin, Acephate'
+            },
+            {
+                name: 'Potato',
+                climate: ['temperate'],
+                soil: ['silt', 'loamy'],
+                water: ['moderate'],
+                fertilizers: 'Ammonium Sulphate, Potassium Sulphate',
+                pesticides: 'Imidacloprid, Spinosad'
+            },
+            {
+                name: 'Sugarcane',
+                climate: ['tropical'],
+                soil: ['clay', 'loamy'],
+                water: ['high'],
+                fertilizers: 'Urea, Phosphate',
+                pesticides: 'Monocrotophos, Carbofuran'
+            },
+            {
+                name: 'Soybean',
+                climate: ['temperate'],
+                soil: ['loamy', 'clay'],
+                water: ['moderate'],
+                fertilizers: 'Phosphate, Potassium',
+                pesticides: 'Lambda-Cyhalothrin, Permethrin'
+            },
+            {
+                name: 'Millet',
+                climate: ['dry', 'continental'],
+                soil: ['sandy', 'loamy'],
+                water: ['low'],
+                fertilizers: 'Urea, Potash',
+                pesticides: 'Dimethoate, Carbaryl'
+            },
+            {
+                name: 'Peas',
+                climate: ['temperate'],
+                soil: ['peat', 'silt'],
+                water: ['moderate'],
+                fertilizers: 'Ammonium Phosphate, Potassium Sulphate',
+                pesticides: 'Thiamethoxam, Abamectin'
+            }
+        ];
+
+        // Filter crops based on user input
+        const suggestedCrops = crops.filter(crop => 
+            crop.climate.includes(climate) && 
+            crop.soil.includes(soil) && 
+            crop.water.includes(water)
+        );
+
+        // Display the results
+        const cropList = document.getElementById('cropList');
+        cropList.innerHTML = '';
+        if (suggestedCrops.length > 0) {
+            suggestedCrops.forEach(crop => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>Crop Name:</strong> ${crop.name}<br>
+                                <strong>Fertilizers:</strong> ${crop.fertilizers}<br>
+                                <strong>Pesticides:</strong> ${crop.pesticides}`;
+                cropList.appendChild(li);
+            });
+        } else {
+            cropList.innerHTML = '<li>No crops found for the given conditions, but consider general crops like Corn, Beans, or Sorghum.</li>';
+        }
+        document.getElementById('cropResult').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
